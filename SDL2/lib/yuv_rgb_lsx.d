@@ -1,0 +1,21 @@
+build/yuv_rgb_lsx.lo: \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/yuv2rgb/yuv_rgb_lsx.c \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/yuv2rgb/../../SDL_internal.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/yuv2rgb/../../dynapi/SDL_dynapi.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/yuv2rgb/../../dynapi/SDL_dynapi_overrides.h \
+ include/SDL_config.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_platform.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/begin_code.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/close_code.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_assert.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_stdinc.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_config.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_log.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/yuv2rgb/yuv_rgb.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/yuv2rgb/yuv_rgb_std.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/yuv2rgb/yuv_rgb_common.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_stdinc.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/yuv2rgb/yuv_rgb_sse.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/yuv2rgb/yuv_rgb_lsx.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/yuv2rgb/yuv_rgb_internal.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_cpuinfo.h

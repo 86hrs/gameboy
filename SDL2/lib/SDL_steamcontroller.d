@@ -1,0 +1,26 @@
+build/SDL_steamcontroller.lo: \
+ /home/ataman/Downloads/SDL2-2.32.2/src/joystick/steam/SDL_steamcontroller.c \
+ /home/ataman/Downloads/SDL2-2.32.2/src/joystick/steam/../../SDL_internal.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/joystick/steam/../../dynapi/SDL_dynapi.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/joystick/steam/../../dynapi/SDL_dynapi_overrides.h \
+ include/SDL_config.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_platform.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/begin_code.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/close_code.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_assert.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_stdinc.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_config.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_log.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/joystick/steam/../SDL_sysjoystick.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/joystick/steam/../../SDL_internal.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_joystick.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_error.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_guid.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_mutex.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/joystick/steam/../SDL_joystick_c.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_gamecontroller.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_rwops.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_sensor.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_joystick.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/joystick/steam/../SDL_joystick_c.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/joystick/steam/SDL_steamcontroller.h

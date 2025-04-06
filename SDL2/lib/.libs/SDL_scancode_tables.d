@@ -1,0 +1,19 @@
+build/SDL_scancode_tables.lo: \
+ /home/ataman/Downloads/SDL2-2.32.2/src/events/SDL_scancode_tables.c \
+ /home/ataman/Downloads/SDL2-2.32.2/src/events/../SDL_internal.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/events/../dynapi/SDL_dynapi.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/events/../dynapi/SDL_dynapi_overrides.h \
+ include/SDL_config.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_platform.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/begin_code.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/close_code.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_assert.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_stdinc.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_config.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_log.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/events/SDL_scancode_tables_c.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/events/../../include/SDL_scancode.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/events/../../include/SDL_stdinc.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/events/scancodes_darwin.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/events/scancodes_linux.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/events/scancodes_xfree86.h

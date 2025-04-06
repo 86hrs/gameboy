@@ -1,0 +1,44 @@
+build/SDL_vulkan_utils.lo: \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/SDL_vulkan_utils.c \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/../SDL_internal.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/../dynapi/SDL_dynapi.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/../dynapi/SDL_dynapi_overrides.h \
+ include/SDL_config.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_platform.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/begin_code.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/close_code.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_assert.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_stdinc.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_config.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_log.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/SDL_vulkan_internal.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_stdinc.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/wayland/SDL_waylanddyn.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/wayland/../../SDL_internal.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/wayland/SDL_waylandsym.h \
+ gen/wayland-client-protocol.h /usr/include/libdecor-0/libdecor.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/./khronos/vulkan/vulkan.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/./khronos/vulkan/vk_platform.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/./khronos/vulkan/vulkan_core.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/./khronos/vulkan/../vk_video/vulkan_video_codec_h264std.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/./khronos/vulkan/../vk_video/vulkan_video_codecs_common.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/./khronos/vulkan/../vk_video/vulkan_video_codec_h264std_encode.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/./khronos/vulkan/../vk_video/vulkan_video_codec_h264std.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/./khronos/vulkan/../vk_video/vulkan_video_codec_h265std.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/./khronos/vulkan/../vk_video/vulkan_video_codec_h265std_encode.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/./khronos/vulkan/../vk_video/vulkan_video_codec_h265std.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/./khronos/vulkan/../vk_video/vulkan_video_codec_h264std_decode.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/./khronos/vulkan/../vk_video/vulkan_video_codec_h265std_decode.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/./khronos/vulkan/vulkan_wayland.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/./khronos/vulkan/vulkan_xcb.h \
+ /home/ataman/Downloads/SDL2-2.32.2/src/video/./khronos/vulkan/vulkan_xlib.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_vulkan.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_video.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_pixels.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_endian.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_rect.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_error.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_rwops.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_surface.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_blendmode.h \
+ /home/ataman/Downloads/SDL2-2.32.2/include/SDL_error.h
