@@ -48,9 +48,9 @@ pub fn build(b: *std.Build) void {
         }
     }
 
-    if(target.os.result.tag == .linux) {
-      exe.linkSystemLibrary("SDL2");
-      exe.linkLibC();
+    if (target.result.os.tag == .linux) {
+        exe.linkSystemLibrary("SDL2");
+        exe.linkLibC();
     }
 
     b.installArtifact(exe);
