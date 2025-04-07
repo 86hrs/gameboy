@@ -14,7 +14,6 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
-
     const exe = b.addExecutable(.{
         .name = "gameboy",
         .root_module = exe_mod,
@@ -22,8 +21,37 @@ pub fn build(b: *std.Build) void {
 
     exe.addIncludePath(b.path("SDL2/include"));
     exe.addLibraryPath(b.path("SDL2/lib"));
-    exe.linkSystemLibrary("SDL2");
-    exe.linkLibC();
+
+    if (target.result.os.tag == .macos) {
+        exe.addObjectFile(b.path("sdl2.a"));
+
+        exe.addSystemFrameworkPath(.{ .cwd_relative = "/System/Library/Frameworks/" });
+        const frameworks = .{
+            "Cocoa",
+            "CoreVideo",
+            "IOKit",
+            "CoreFoundation",
+            "Carbon",
+            "ForceFeedback",
+            "GameController",
+            "Metal",
+            "CoreAudio",
+            "CoreHaptics",
+            "AudioToolbox",
+        };
+        // Add framework search path
+        exe.addFrameworkPath(.{ .cwd_relative = "/System/Library/Frameworks" });
+
+        // Link each framework
+        inline for (frameworks) |framework| {
+            exe.linkFramework(framework);
+        }
+    }
+
+    if(target.os.result.tag == .linux) {
+      exe.linkSystemLibrary("SDL2");
+      exe.linkLibC();
+    }
 
     b.installArtifact(exe);
 

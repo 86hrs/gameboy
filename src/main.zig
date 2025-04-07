@@ -4,7 +4,7 @@ const process = std.process;
 
 const CPU = @import("cpu.zig");
 
-const c = @cImport(@cInclude("SDL2/SDL.h"));
+const c = @cImport(@cInclude("SDL.h"));
 
 var window: ?*c.SDL_Window = null;
 var renderer: ?*c.SDL_Renderer = null;
@@ -65,11 +65,14 @@ pub fn buildTexture(system: *CPU) void {
     for (0..144) |y| {
         for (0..160) |x| {
             const pixel_val = system.getPixel(@as(u8, @intCast(x)), @as(u8, @intCast(y)));
-            // Convert RGB to ARGB (SDL expects bytes in order: A R G B)
-            pixels[y * 160 + x] = 0xFF000000 | // Alpha (fully opaque)
-                ((pixel_val & 0xFF0000) >> 16) | // Red
-                ((pixel_val & 0x00FF00)) | // Green
-                ((pixel_val & 0x0000FF) << 16); // Blue
+            
+            // Extract RGB components (getPixel returns 0xRRGGBB)
+            const r = (pixel_val >> 16) & 0xFF;  // Red
+            const g = (pixel_val >> 8) & 0xFF;   // Green
+            const b = pixel_val & 0xFF;          // Blue
+            
+            // Pack into RGBA8888 format (0xRRGGBBAA)
+            pixels[y * 160 + x] = (r << 24) | (g << 16) | (b << 8) | 0xFF; // Alpha = 0xFF (fully opaque)
         }
     }
 

@@ -143,7 +143,7 @@ pub fn getPixel(self: *Self, x: u8, y: u8) u32 {
         1 => 0xAAAAAA, // Light Gray
         2 => 0x555555, // Dark Gray
         3 => 0x000000, // Black
-        else => unreachable, // Should never happen
+        else => unreachable, 
     };
 }
 // Jump
