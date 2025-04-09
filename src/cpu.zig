@@ -143,7 +143,7 @@ pub fn getPixel(self: *Self, x: u8, y: u8) u32 {
         1 => 0xAAAAAA, // Light Gray
         2 => 0x555555, // Dark Gray
         3 => 0x000000, // Black
-        else => unreachable, 
+        else => unreachable,
     };
 }
 // Jump
@@ -2180,14 +2180,187 @@ pub fn c_opcodes(self: *Self) !void {
             self.bit_flag(self.registers[REG_H], .Bit4);
             cycles_this_op = 8;
         },
-        0x74  => {
+        0x74 => {
             self.bit_flag(self.registers[REG_H], .Bit5);
             cycles_this_op = 8;
         },
-        0x7C  => {
+        0x7C => {
             self.bit_flag(self.registers[REG_H], .Bit6);
             cycles_this_op = 8;
         },
+
+        0x45 => {
+            self.bit_flag(self.registers[REG_L], .Bit0);
+            cycles_this_op = 8;
+        },
+        0x4D => {
+            self.bit_flag(self.registers[REG_L], .Bit1);
+            cycles_this_op = 8;
+        },
+        0x55 => {
+            self.bit_flag(self.registers[REG_L], .Bit2);
+            cycles_this_op = 8;
+        },
+        0x5D => {
+            self.bit_flag(self.registers[REG_L], .Bit3);
+            cycles_this_op = 8;
+        },
+        0x65 => {
+            self.bit_flag(self.registers[REG_L], .Bit4);
+            cycles_this_op = 8;
+        },
+        0x6D => {
+            self.bit_flag(self.registers[REG_L], .Bit5);
+            cycles_this_op = 8;
+        },
+        0x75 => {
+            self.bit_flag(self.registers[REG_L], .Bit6);
+            cycles_this_op = 8;
+        },
+        0x7D => {
+            self.bit_flag(self.registers[REG_L], .Bit7);
+            cycles_this_op = 8;
+        },
+
+        0x46 => {
+            const n = self.read_byte(self.get_hl());
+            self.bit_flag(n, .Bit0);
+            cycles_this_op = 12;
+        },
+        0x4E => {
+            const n = self.read_byte(self.get_hl());
+            self.bit_flag(n, .Bit1);
+            cycles_this_op = 12;
+        },
+        0x56 => {
+            const n = self.read_byte(self.get_hl());
+            self.bit_flag(n, .Bit2);
+            cycles_this_op = 12;
+        },
+        0x5E => {
+            const n = self.read_byte(self.get_hl());
+            self.bit_flag(n, .Bit3);
+            cycles_this_op = 12;
+        },
+        0x66 => {
+            const n = self.read_byte(self.get_hl());
+            self.bit_flag(n, .Bit4);
+            cycles_this_op = 12;
+        },
+        0x6E => {
+            const n = self.read_byte(self.get_hl());
+            self.bit_flag(n, .Bit5);
+            cycles_this_op = 12;
+        },
+        0x76 => {
+            const n = self.read_byte(self.get_hl());
+            self.bit_flag(n, .Bit6);
+            cycles_this_op = 12;
+        },
+        0x7E => {
+            const n = self.read_byte(self.get_hl());
+            self.bit_flag(n, .Bit7);
+            cycles_this_op = 12;
+        },
+        // Set
+        0xC7 => {
+            self.registers[REG_A] = self.set(regs[REG_A], .Bit0);
+            cycles_this_op = 8;
+        },
+        0xCF => {
+            self.registers[REG_A] = self.set(regs[REG_A], .Bit1);
+            cycles_this_op = 8;
+        },
+        0xD7 => {
+            self.registers[REG_A] = self.set(regs[REG_A], .Bit2);
+            cycles_this_op = 8;
+        },
+        0xDF => {
+            self.registers[REG_A] = self.set(regs[REG_A], .Bit3);
+            cycles_this_op = 8;
+        },
+        0xE7 => {
+            self.registers[REG_A] = self.set(regs[REG_A], .Bit4);
+            cycles_this_op = 8;
+        },
+        0xEF => {
+            self.registers[REG_A] = self.set(regs[REG_A], .Bit5);
+            cycles_this_op = 8;
+        },
+        0xF7 => {
+            self.registers[REG_A] = self.set(regs[REG_A], .Bit6);
+            cycles_this_op = 8;
+        },
+        0xFF => {
+            self.registers[REG_A] = self.set(regs[REG_A], .Bit7);
+            cycles_this_op = 8;
+        },
+
+	0xC0 => {
+            self.registers[REG_B] = self.set(regs[REG_B], .Bit0);
+            cycles_this_op = 8;
+	},
+	0xC8 => {
+            self.registers[REG_B] = self.set(regs[REG_B], .Bit1);
+            cycles_this_op = 8;
+	},
+	0xD0 => {
+            self.registers[REG_B] = self.set(regs[REG_B], .Bit2);
+            cycles_this_op = 8;
+	},
+	0xD8 => {
+            self.registers[REG_B] = self.set(regs[REG_B], .Bit3);
+            cycles_this_op = 8;
+	},
+	0xE0 => {
+            self.registers[REG_B] = self.set(regs[REG_B], .Bit4);
+            cycles_this_op = 8;
+	},
+	0xE8 => {
+            self.registers[REG_B] = self.set(regs[REG_B], .Bit5);
+            cycles_this_op = 8;
+	},
+	0xF0 => {
+            self.registers[REG_B] = self.set(regs[REG_B], .Bit6);
+            cycles_this_op = 8;
+	},
+	0xF8 => {
+            self.registers[REG_B] = self.set(regs[REG_B], .Bit7);
+            cycles_this_op = 8;
+	},
+
+	0xC1 => {
+            self.registers[REG_C] = self.set(regs[REG_C], .Bit0);
+            cycles_this_op = 8;
+	},
+	0xC9 => {
+            self.registers[REG_C] = self.set(regs[REG_C], .Bit1);
+            cycles_this_op = 8;
+	},
+	0xD1 => {
+            self.registers[REG_C] = self.set(regs[REG_C], .Bit2);
+            cycles_this_op = 8;
+	},
+	0xD9 => {
+            self.registers[REG_C] = self.set(regs[REG_C], .Bit3);
+            cycles_this_op = 8;
+	},
+	0xE1 => {
+            self.registers[REG_C] = self.set(regs[REG_C], .Bit4);
+            cycles_this_op = 8;
+	},
+	0xE9 => {
+            self.registers[REG_C] = self.set(regs[REG_C], .Bit5);
+            cycles_this_op = 8;
+	},
+	0xF1 => {
+            self.registers[REG_C] = self.set(regs[REG_C], .Bit6);
+            cycles_this_op = 8;
+	},
+	0xF9 => {
+            self.registers[REG_C] = self.set(regs[REG_C], .Bit7);
+            cycles_this_op = 8;
+	},
         else => {
             self.unimplemented_opcode = opcode;
         },
