@@ -645,6 +645,7 @@ impl CPU {
 			0xEA => { self.regs.d = self.set(regs.d, Bit::Bit5); 2 },
 			0xF2 => { self.regs.d = self.set(regs.d, Bit::Bit6); 2 },
 			0xFA => { self.regs.d = self.set(regs.d, Bit::Bit7); 2 },
+
 			0xC3 => { self.regs.e = self.set(regs.e, Bit::Bit0); 2 },
 			0xCB => { self.regs.e = self.set(regs.e, Bit::Bit1); 2 },
 			0xD3 => { self.regs.e = self.set(regs.e, Bit::Bit2); 2 },
@@ -653,6 +654,7 @@ impl CPU {
 			0xEB => { self.regs.e = self.set(regs.e, Bit::Bit5); 2 },
 			0xF3 => { self.regs.e = self.set(regs.e, Bit::Bit6); 2 },
 			0xFB => { self.regs.e = self.set(regs.e, Bit::Bit7); 2 },
+
 			0xC4 => { self.regs.h = self.set(regs.h, Bit::Bit0); 2 },
 			0xCC => { self.regs.h = self.set(regs.h, Bit::Bit1); 2 },
 			0xD4 => { self.regs.h = self.set(regs.h, Bit::Bit2); 2 },
@@ -661,6 +663,7 @@ impl CPU {
 			0xEC => { self.regs.h = self.set(regs.h, Bit::Bit5); 2 },
 			0xF4 => { self.regs.h = self.set(regs.h, Bit::Bit6); 2 },
 			0xFC => { self.regs.h = self.set(regs.h, Bit::Bit7); 2 },
+
 			0xC5 => { self.regs.l = self.set(regs.l, Bit::Bit0); 2 },
 			0xCD => { self.regs.l = self.set(regs.l, Bit::Bit1); 2 },
 			0xD5 => { self.regs.l = self.set(regs.l, Bit::Bit2); 2 },
@@ -669,6 +672,7 @@ impl CPU {
 			0xED => { self.regs.l = self.set(regs.l, Bit::Bit5); 2 },
 			0xF5 => { self.regs.l = self.set(regs.l, Bit::Bit6); 2 },
 			0xFD => { self.regs.l = self.set(regs.l, Bit::Bit7); 2 },
+
 			0xC6 => { let n = memory.read(regs.hl()); memory.write(regs.hl(), self.set(n, Bit::Bit0)); 4 },
 			0xCE => { let n = memory.read(regs.hl()); memory.write(regs.hl(), self.set(n, Bit::Bit1)); 4 },
 			0xD6 => { let n = memory.read(regs.hl()); memory.write(regs.hl(), self.set(n, Bit::Bit2)); 4 },

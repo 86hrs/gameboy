@@ -2361,6 +2361,72 @@ pub fn c_opcodes(self: *Self) !void {
             self.registers[REG_C] = self.set(regs[REG_C], .Bit7);
             cycles_this_op = 8;
 	},
+
+	0xC2 => {
+            self.registers[REG_D] = self.set(regs[REG_D], .Bit0);
+            cycles_this_op = 8;
+	},
+	0xCA => {
+            self.registers[REG_D] = self.set(regs[REG_D], .Bit1);
+            cycles_this_op = 8;
+	},
+	0xD2 => {
+            self.registers[REG_D] = self.set(regs[REG_D], .Bit2);
+            cycles_this_op = 8;
+	},
+	0xDA => {
+            self.registers[REG_D] = self.set(regs[REG_D], .Bit3);
+            cycles_this_op = 8;
+	},
+	0xE2 => {
+            self.registers[REG_D] = self.set(regs[REG_D], .Bit4);
+            cycles_this_op = 8;
+	},
+	0xEA => {
+            self.registers[REG_D] = self.set(regs[REG_D], .Bit5);
+            cycles_this_op = 8;
+	},
+	0xF2 => {
+            self.registers[REG_D] = self.set(regs[REG_D], .Bit6);
+            cycles_this_op = 8;
+	},
+	0xFA => {
+            self.registers[REG_D] = self.set(regs[REG_D], .Bit7);
+            cycles_this_op = 8;
+	},
+
+	0xC3 => {
+            self.registers[REG_E] = self.set(regs[REG_E], .Bit0);
+            cycles_this_op = 8;
+	},
+	0xCB => {
+            self.registers[REG_E] = self.set(regs[REG_E], .Bit1);
+            cycles_this_op = 8;
+	},
+	0xD3 => {
+            self.registers[REG_E] = self.set(regs[REG_E], .Bit2);
+            cycles_this_op = 8;
+	},
+	0xDB => {
+            self.registers[REG_E] = self.set(regs[REG_E], .Bit3);
+            cycles_this_op = 8;
+	},
+	0xE3 => {
+            self.registers[REG_E] = self.set(regs[REG_E], .Bit4);
+            cycles_this_op = 8;
+	},
+	0xEB => {
+            self.registers[REG_E] = self.set(regs[REG_E], .Bit5);
+            cycles_this_op = 8;
+	},
+	0xF3 => {
+            self.registers[REG_E] = self.set(regs[REG_E], .Bit6);
+            cycles_this_op = 8;
+	},
+	0xFB => {
+            self.registers[REG_E] = self.set(regs[REG_E], .Bit7);
+            cycles_this_op = 8;
+	},
         else => {
             self.unimplemented_opcode = opcode;
         },
