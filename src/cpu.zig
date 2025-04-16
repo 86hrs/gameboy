@@ -155,33 +155,44 @@ pub fn getPixel(self: *Self, x: u8, y: u8) u32 {
     if (x >= 160 or y >= 144) return 0x000000;
 
     const lcd_control = self.read_byte(0xFF40);
-    const bgp = self.read_byte(0xFF47);
-
-    const tile_map_addr: u16 = if ((lcd_control & 0x08) != 0) 0x9C00 else 0x9800;
-    const tile_x = @as(u16, x) / 8;
-    const tile_y = @as(u16, y) / 8;
-    const tile_index_addr = tile_map_addr + tile_y * 32 + tile_x;
-
-    const tile_index = self.read_byte(tile_index_addr);
-    const tile_data_base: u16 = if ((lcd_control & 0x10) != 0) 0x8000 else 0x8800;
-
-    var tile_addr: u16 = undefined;
-    if (tile_data_base == 0x8800) {
-        const signed_index = @as(i16, @intCast(@as(i8, @bitCast(tile_index))));
-        tile_addr = @as(u16, @intCast(signed_index + 128)) * 16 + 0x8000;
-    } else {
-        tile_addr = @as(u16, tile_index) * 16 + 0x8000;
+    
+    if ((lcd_control & 0x80) == 0) {
+        return 0xFFFFFF;
     }
 
-    const row = @as(u16, y % 8) * 2;
+    const bgp = self.read_byte(0xFF47);
+    const tile_map_addr: u16 = if ((lcd_control & 0x08) != 0) 0x9C00 else 0x9800;
+    const tile_data_base: u16 = if ((lcd_control & 0x10) != 0) 0x8000 else 0x8800;
 
-    const low_byte = self.read_byte(tile_addr + row);
-    const high_byte = self.read_byte(tile_addr + row + 1);
+    const scroll_x = self.read_byte(0xFF43);
+    const scroll_y = self.read_byte(0xFF42);
+    const tile_x = @as(u16, x) +% @as(u16, scroll_x);
+    const tile_y = @as(u16, y) +% @as(u16, scroll_y);
+    const wrapped_tile_x = tile_x / 8;
+    const wrapped_tile_y = tile_y / 8;
 
-    const bit_index = @as(u3, 7 - @as(u3, @intCast(x % 8)));
+    const tile_index_addr = tile_map_addr +% (wrapped_tile_y % 32) * 32 +% (wrapped_tile_x % 32);
+
+    const tile_index = self.read_byte(tile_index_addr);
+    
+    var tile_addr: u16 = undefined;
+    if (tile_data_base == 0x8800) {
+        const signed_index = @as(i16, @as(i8, @bitCast(tile_index)));
+        tile_addr = @as(u16, @intCast(signed_index + 128)) * 16 + 0x8000;
+    } else {
+        tile_addr = tile_data_base + @as(u16, tile_index) * 16;
+    }
+
+    const row = (y + scroll_y) % 8;
+    const tile_row_addr = tile_addr + row * 2;
+    const low_byte = self.read_byte(tile_row_addr);
+    const high_byte = self.read_byte(tile_row_addr + 1);
+
+    const bit_index = 7 - @as(u3, @intCast((x + scroll_x) % 8));
     const color_id = (((high_byte >> bit_index) & 1) << 1) | ((low_byte >> bit_index) & 1);
-    const color = (bgp >> (@as(u3, @intCast(color_id)) * 2)) & 0x03;
+    const color = (bgp >> (@as(u3, @intCast(color_id * 2)))) & 0x03;
 
+ 
     return switch (color) {
         0 => 0xFFFFFF, // White
         1 => 0xAAAAAA, // Light Gray
@@ -2531,7 +2542,8 @@ pub fn init(self: *Self) void {
     }
 
     self.write_byte(0xFF40, 0x91);
-    self.write_byte(0xFF47, 0xE4);
+    self.write_byte(0xFF47, 0xFC); // Default palette: 11 10 01 00
+
 
     self.registers[REG_A] = 0x01;
     self.registers[REG_B] = 0x00;
