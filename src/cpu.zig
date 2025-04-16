@@ -3,6 +3,47 @@ const print = std.debug.print;
 
 const Self = @This();
 
+// === INPUT ===
+const Input = struct {
+    right: bool = false,
+    left: bool = false,
+    up: bool = false,
+    down: bool = false,
+    a: bool = false,
+    b: bool = false,
+    start: bool = false,
+    select: bool = false,
+
+    // Button group selection
+    select_direction: bool = false,
+    select_action: bool = false,
+    pub fn readJoyPad(self: *const Input) u8 {
+        var value: u8 = 0xFF;
+
+        if (self.select_direction) {
+            value &= 0xFF ^ (1 << 4);
+            if (self.right) value &= 0xFF ^ (1 << 0);
+            if (self.left) value &= 0xFF ^ (1 << 1);
+            if (self.up) value &= 0xFF ^ (1 << 2);
+            if (self.down) value &= 0xFF ^ (1 << 3);
+        }
+
+        if (self.select_action) {
+            value &= 0xFF ^ (1 << 5);
+            if (self.a) value &= 0xFF ^ (1 << 0);
+            if (self.b) value &= 0xFF ^ (1 << 1);
+            if (self.select) value &= 0xFF ^ (1 << 2);
+            if (self.start) value &= 0xFF ^ (1 << 3);
+        }
+
+        return value | 0xC0;
+    }
+    pub fn writeJoyPad(self: *Input, value: u8) void {
+        self.select_direction = (value & (1 << 4)) == 0;
+        self.select_action = (value & (1 << 5)) == 0;
+    }
+};
+
 // === SM83 ===
 const Flags = enum(u8) {
     Zero = 1 << 7,
@@ -45,6 +86,9 @@ const REG_E: u8 = 4;
 const REG_H: u8 = 5;
 const REG_L: u8 = 6;
 const REG_F: u8 = 7;
+
+// Input Object
+input: Input,
 
 // 8-bit 7 General Purpose registers (A,B,C,D,H,L)
 // 8-bit flags register (F)
@@ -525,24 +569,26 @@ pub fn hld(self: *Self) void {
 }
 // Memory access
 pub fn read_byte(self: *Self, address: u16) u8 {
-    return self.memory[address];
+    return switch (address) {
+        0xFF00 => self.input.readJoyPad(),
+        else => self.memory[address],
+    };
 }
-
 pub fn write_byte(self: *Self, address: u16, value: u8) void {
-    self.memory[address] = value;
+    switch (address) {
+        0xFF00 => self.input.writeJoyPad(value),
+        else => self.memory[address] = value,
+    }
 }
-
 pub fn read_word(self: *Self, address: u16) u16 {
     const low: u8 = self.read_byte(address);
     const high: u8 = self.read_byte(address + 1);
     return (@as(u16, high) << 8) | low;
 }
-
 pub fn write_word(self: *Self, address: u16, value: u16) void {
     self.write_byte(address, @truncate(value & 0xFF));
     self.write_byte(address + 1, @truncate((value >> 8) & 0xFF));
 }
-
 // Stack operations
 pub fn push(self: *Self, value: u16) void {
     self.stack_pointer -%= 2;
@@ -2296,137 +2342,137 @@ pub fn c_opcodes(self: *Self) !void {
             cycles_this_op = 8;
         },
 
-	0xC0 => {
+        0xC0 => {
             self.registers[REG_B] = self.set(regs[REG_B], .Bit0);
             cycles_this_op = 8;
-	},
-	0xC8 => {
+        },
+        0xC8 => {
             self.registers[REG_B] = self.set(regs[REG_B], .Bit1);
             cycles_this_op = 8;
-	},
-	0xD0 => {
+        },
+        0xD0 => {
             self.registers[REG_B] = self.set(regs[REG_B], .Bit2);
             cycles_this_op = 8;
-	},
-	0xD8 => {
+        },
+        0xD8 => {
             self.registers[REG_B] = self.set(regs[REG_B], .Bit3);
             cycles_this_op = 8;
-	},
-	0xE0 => {
+        },
+        0xE0 => {
             self.registers[REG_B] = self.set(regs[REG_B], .Bit4);
             cycles_this_op = 8;
-	},
-	0xE8 => {
+        },
+        0xE8 => {
             self.registers[REG_B] = self.set(regs[REG_B], .Bit5);
             cycles_this_op = 8;
-	},
-	0xF0 => {
+        },
+        0xF0 => {
             self.registers[REG_B] = self.set(regs[REG_B], .Bit6);
             cycles_this_op = 8;
-	},
-	0xF8 => {
+        },
+        0xF8 => {
             self.registers[REG_B] = self.set(regs[REG_B], .Bit7);
             cycles_this_op = 8;
-	},
+        },
 
-	0xC1 => {
+        0xC1 => {
             self.registers[REG_C] = self.set(regs[REG_C], .Bit0);
             cycles_this_op = 8;
-	},
-	0xC9 => {
+        },
+        0xC9 => {
             self.registers[REG_C] = self.set(regs[REG_C], .Bit1);
             cycles_this_op = 8;
-	},
-	0xD1 => {
+        },
+        0xD1 => {
             self.registers[REG_C] = self.set(regs[REG_C], .Bit2);
             cycles_this_op = 8;
-	},
-	0xD9 => {
+        },
+        0xD9 => {
             self.registers[REG_C] = self.set(regs[REG_C], .Bit3);
             cycles_this_op = 8;
-	},
-	0xE1 => {
+        },
+        0xE1 => {
             self.registers[REG_C] = self.set(regs[REG_C], .Bit4);
             cycles_this_op = 8;
-	},
-	0xE9 => {
+        },
+        0xE9 => {
             self.registers[REG_C] = self.set(regs[REG_C], .Bit5);
             cycles_this_op = 8;
-	},
-	0xF1 => {
+        },
+        0xF1 => {
             self.registers[REG_C] = self.set(regs[REG_C], .Bit6);
             cycles_this_op = 8;
-	},
-	0xF9 => {
+        },
+        0xF9 => {
             self.registers[REG_C] = self.set(regs[REG_C], .Bit7);
             cycles_this_op = 8;
-	},
+        },
 
-	0xC2 => {
+        0xC2 => {
             self.registers[REG_D] = self.set(regs[REG_D], .Bit0);
             cycles_this_op = 8;
-	},
-	0xCA => {
+        },
+        0xCA => {
             self.registers[REG_D] = self.set(regs[REG_D], .Bit1);
             cycles_this_op = 8;
-	},
-	0xD2 => {
+        },
+        0xD2 => {
             self.registers[REG_D] = self.set(regs[REG_D], .Bit2);
             cycles_this_op = 8;
-	},
-	0xDA => {
+        },
+        0xDA => {
             self.registers[REG_D] = self.set(regs[REG_D], .Bit3);
             cycles_this_op = 8;
-	},
-	0xE2 => {
+        },
+        0xE2 => {
             self.registers[REG_D] = self.set(regs[REG_D], .Bit4);
             cycles_this_op = 8;
-	},
-	0xEA => {
+        },
+        0xEA => {
             self.registers[REG_D] = self.set(regs[REG_D], .Bit5);
             cycles_this_op = 8;
-	},
-	0xF2 => {
+        },
+        0xF2 => {
             self.registers[REG_D] = self.set(regs[REG_D], .Bit6);
             cycles_this_op = 8;
-	},
-	0xFA => {
+        },
+        0xFA => {
             self.registers[REG_D] = self.set(regs[REG_D], .Bit7);
             cycles_this_op = 8;
-	},
+        },
 
-	0xC3 => {
+        0xC3 => {
             self.registers[REG_E] = self.set(regs[REG_E], .Bit0);
             cycles_this_op = 8;
-	},
-	0xCB => {
+        },
+        0xCB => {
             self.registers[REG_E] = self.set(regs[REG_E], .Bit1);
             cycles_this_op = 8;
-	},
-	0xD3 => {
+        },
+        0xD3 => {
             self.registers[REG_E] = self.set(regs[REG_E], .Bit2);
             cycles_this_op = 8;
-	},
-	0xDB => {
+        },
+        0xDB => {
             self.registers[REG_E] = self.set(regs[REG_E], .Bit3);
             cycles_this_op = 8;
-	},
-	0xE3 => {
+        },
+        0xE3 => {
             self.registers[REG_E] = self.set(regs[REG_E], .Bit4);
             cycles_this_op = 8;
-	},
-	0xEB => {
+        },
+        0xEB => {
             self.registers[REG_E] = self.set(regs[REG_E], .Bit5);
             cycles_this_op = 8;
-	},
-	0xF3 => {
+        },
+        0xF3 => {
             self.registers[REG_E] = self.set(regs[REG_E], .Bit6);
             cycles_this_op = 8;
-	},
-	0xFB => {
+        },
+        0xFB => {
             self.registers[REG_E] = self.set(regs[REG_E], .Bit7);
             cycles_this_op = 8;
-	},
+        },
         else => {
             self.unimplemented_opcode = opcode;
         },
