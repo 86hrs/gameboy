@@ -14,7 +14,6 @@ const Input = struct {
     start: bool = false,
     select: bool = false,
 
-    // Button group selection
     select_direction: bool = false,
     select_action: bool = false,
     pub fn readJoyPad(self: *const Input) u8 {
